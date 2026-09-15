@@ -7,11 +7,11 @@ Bring your own Anthropic API key. No server, no account, no tracking.
 
 <img width="400" height="400" alt="image" src="https://github.com/user-attachments/assets/7305313d-c9f8-4c92-b9f3-6c6ee81504c6" />
 
-<img width="532" height="748" alt="image" src="https://github.com/user-attachments/assets/6c55e7d4-32fc-4205-bc39-c7183a08fd5e" />
+<img width="400" height="400" alt="image" src="https://github.com/user-attachments/assets/6c55e7d4-32fc-4205-bc39-c7183a08fd5e" />
 
-<img width="912" height="812" alt="image" src="https://github.com/user-attachments/assets/614bee2d-2e26-4140-9e10-f4a509f4a25a" />
+<img width="400" height="400" alt="image" src="https://github.com/user-attachments/assets/614bee2d-2e26-4140-9e10-f4a509f4a25a" />
 
-<img width="901" height="952" alt="image" src="https://github.com/user-attachments/assets/9ff43611-9948-413b-b7c1-6c74bcb1ee81" />
+<img width="400" height="400" alt="image" src="https://github.com/user-attachments/assets/9ff43611-9948-413b-b7c1-6c74bcb1ee81" />
 
 
 ## Features
