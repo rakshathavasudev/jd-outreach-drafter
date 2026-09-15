@@ -1,0 +1,79 @@
+:root {
+  --paper: #eef2f7;
+  --sheet: #ffffff;
+  --ink: #1b2b4b;
+  --muted: #5b6b86;
+  --rule: #cbd4e1;
+  --blue: #23407a;
+  --red: #c8372d;
+  --ok: #2d6a4f;
+  --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  --sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: 13px/1.45 var(--sans);
+}
+
+/* The one loud element: an airmail edge */
+.airmail {
+  height: 7px;
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--red) 0 9px, var(--paper) 9px 14px,
+    var(--blue) 14px 23px, var(--paper) 23px 28px
+  );
+}
+
+h1, h2 { font-family: var(--serif); font-weight: 600; margin: 0; }
+h1 { font-size: 19px; letter-spacing: -0.01em; }
+h2 { font-size: 15px; }
+
+label { display: block; font-weight: 600; margin: 12px 0 4px; }
+.hint { color: var(--muted); font-size: 12px; font-weight: 400; }
+
+input[type="text"], input[type="password"], input[type="email"], select, textarea {
+  width: 100%;
+  font: inherit;
+  color: var(--ink);
+  background: var(--sheet);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 7px 9px;
+}
+textarea { resize: vertical; line-height: 1.5; }
+input:focus-visible, select:focus-visible, textarea:focus-visible, button:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 1px;
+}
+
+button {
+  font: inherit;
+  font-weight: 600;
+  border-radius: 4px;
+  padding: 7px 12px;
+  cursor: pointer;
+  border: 1px solid var(--blue);
+  background: var(--sheet);
+  color: var(--blue);
+}
+button.primary { background: var(--blue); color: #fff; }
+button.primary:hover { background: #1a3161; }
+button:disabled { opacity: 0.55; cursor: default; }
+button.link { border: none; background: none; padding: 0; color: var(--blue); text-decoration: underline; font-weight: 500; }
+
+.row { display: flex; gap: 8px; align-items: center; }
+.row > * { flex: 1; }
+.row > .shrink { flex: 0 0 auto; }
+
+.error { color: var(--red); margin: 8px 0 0; }
+.muted { color: var(--muted); }
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}

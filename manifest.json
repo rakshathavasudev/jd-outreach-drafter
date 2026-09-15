@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "JD Outreach Drafter",
+  "version": "1.1.0",
+  "description": "Detects the job description on the page and drafts a cold email + LinkedIn note with Claude, using your resume.",
+  "permissions": ["storage", "activeTab", "scripting", "contextMenus", "unlimitedStorage"],
+  "host_permissions": ["https://api.anthropic.com/*"],
+  "background": { "service_worker": "background.js" },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Draft outreach for this job",
+    "default_icon": { "16": "icons/16.png", "32": "icons/32.png", "48": "icons/48.png" }
+  },
+  "options_page": "options.html",
+  "icons": { "16": "icons/16.png", "48": "icons/48.png", "128": "icons/128.png" },
+  "commands": {
+    "_execute_action": { "suggested_key": { "default": "Alt+Shift+J" } }
+  }
+}
