@@ -5,7 +5,7 @@ cold email and a LinkedIn connection note for the hiring manager or recruiter, g
 
 Bring your own Anthropic API key. No server, no account, no tracking.
 
-<img width="551" height="728" alt="image" src="https://github.com/user-attachments/assets/7305313d-c9f8-4c92-b9f3-6c6ee81504c6" />
+<img width="400" height="400" alt="image" src="https://github.com/user-attachments/assets/7305313d-c9f8-4c92-b9f3-6c6ee81504c6" />
 
 <img width="532" height="748" alt="image" src="https://github.com/user-attachments/assets/6c55e7d4-32fc-4205-bc39-c7183a08fd5e" />
 
