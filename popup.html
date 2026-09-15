@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    body { width: 440px; }
+    main { padding: 12px 16px 16px; }
+    header { display: flex; justify-content: space-between; align-items: baseline; }
+    .job-head { margin-top: 10px; padding-bottom: 10px; border-bottom: 1px solid var(--rule); }
+    .source { color: var(--muted); font-size: 12px; margin-top: 2px; }
+    .source.weak { color: var(--red); }
+    #jdText { height: 110px; font-size: 12px; }
+    .seg { display: flex; border: 1px solid var(--blue); border-radius: 4px; overflow: hidden; }
+    .seg button { flex: 1; border: none; border-radius: 0; }
+    .seg button[aria-pressed="true"] { background: var(--blue); color: #fff; }
+    .contacts { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+    .contacts button { font-weight: 500; padding: 3px 8px; font-size: 12px; }
+    #generate { width: 100%; margin-top: 14px; padding: 9px; }
+
+    .draft { margin-top: 14px; background: var(--sheet); border: 1px solid var(--rule); border-top: 3px solid var(--blue); padding: 10px 12px 12px; }
+    .draft + .draft { border-top-color: var(--red); }
+    .draft-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+    .draft textarea { border-color: transparent; padding: 4px 0; background: transparent; }
+    .draft textarea:focus-visible { border-color: var(--rule); padding: 4px 6px; }
+    #subject { font-weight: 600; border: none; border-bottom: 1px solid var(--rule); border-radius: 0; padding: 4px 0; }
+    #emailBody { height: 220px; }
+    #liNote { height: 90px; }
+    .count.over { color: var(--red); font-weight: 600; }
+    .fit { font-size: 12px; color: var(--muted); margin-top: 8px; }
+    .actions { display: flex; gap: 8px; margin-top: 8px; }
+    .revise { margin-top: 12px; }
+    .loading { margin-top: 14px; color: var(--muted); }
+    .banner { background: var(--sheet); border-left: 3px solid var(--red); padding: 8px 10px; margin-top: 10px; }
+    [hidden] { display: none !important; }
+  </style>
+</head>
+<body>
+  <div class="airmail"></div>
+  <main>
+    <header>
+      <h1>Draft outreach</h1>
+      <button class="link" id="openSettings">Settings</button>
+    </header>
+
+    <div class="banner" id="setupBanner" hidden>
+      Add your API key and at least one resume to start.
+      <button class="link" id="setupLink">Open settings</button>
+    </div>
+
+    <section class="job-head">
+      <div class="row">
+        <input type="text" id="jobTitle" placeholder="Job title" aria-label="Job title" />
+        <input type="text" id="company" placeholder="Company" aria-label="Company" />
+      </div>
+      <div class="source" id="source">Reading this page…</div>
+    </section>
+
+    <label for="jdText">Job description <span class="hint" id="jdCount"></span></label>
+    <textarea id="jdText" placeholder="Paste the job description here if it wasn't found."></textarea>
+    <div class="row" style="margin-top:6px">
+      <button class="link shrink" id="rescan">Scan page again</button>
+      <span class="hint" style="text-align:right">Tip: highlight the JD and scan again to use just that text.</span>
+    </div>
+
+    <label>Sending to</label>
+    <div class="seg" role="group" aria-label="Recipient type">
+      <button id="typeHM" aria-pressed="true">Hiring manager</button>
+      <button id="typeRec" aria-pressed="false">Recruiter</button>
+    </div>
+    <div class="row" style="margin-top:6px">
+      <input type="text" id="recName" placeholder="Their name (optional)" aria-label="Recipient name" />
+      <input type="email" id="recEmail" placeholder="Their email (optional)" aria-label="Recipient email" />
+    </div>
+    <div class="contacts" id="contacts"></div>
+
+    <label for="resumeChoice">Resume</label>
+    <select id="resumeChoice"></select>
+
+    <label for="instructions">Anything to add <span class="hint">optional</span></label>
+    <input type="text" id="instructions" placeholder="e.g. referred by a teammate, mention the Kafka work" />
+
+    <button class="primary" id="generate">Draft email and LinkedIn note</button>
+    <p class="error" id="error" hidden></p>
+    <p class="loading" id="loading" hidden>Drafting with Claude. You can close this popup; the draft will be here when you reopen it.</p>
+
+    <section id="results" hidden>
+      <div class="draft">
+        <div class="draft-head">
+          <h2>Email</h2>
+          <span class="hint" id="variantUsed"></span>
+        </div>
+        <input type="text" id="subject" aria-label="Subject" />
+        <textarea id="emailBody" aria-label="Email body"></textarea>
+        <div class="actions">
+          <button class="primary" id="copyEmail">Copy email</button>
+          <button id="openGmail">Open in Gmail</button>
+        </div>
+        <p class="fit" id="fitNotes"></p>
+      </div>
+
+      <div class="draft">
+        <div class="draft-head">
+          <h2>LinkedIn note</h2>
+          <span class="count" id="liCount"></span>
+        </div>
+        <textarea id="liNote" aria-label="LinkedIn note"></textarea>
+        <div class="actions">
+          <button class="primary" id="copyLi">Copy note</button>
+        </div>
+      </div>
+
+      <div class="revise">
+        <label for="reviseText">Revise</label>
+        <div class="row">
+          <input type="text" id="reviseText" placeholder="e.g. shorter hook, swap bullet 3 for the RAG project" />
+          <button class="shrink" id="reviseBtn">Revise</button>
+        </div>
+      </div>
+    </section>
+  </main>
+  <script src="defaults.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

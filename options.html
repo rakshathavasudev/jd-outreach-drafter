@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>JD Outreach Drafter settings</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    main { max-width: 720px; margin: 0 auto; padding: 28px 24px 60px; }
+    h1 { font-size: 28px; }
+    .lede { color: var(--muted); max-width: 60ch; margin: 6px 0 24px; }
+    fieldset { border: none; border-top: 1px solid var(--rule); padding: 18px 0 6px; margin: 0; }
+    legend { font-family: var(--serif); font-size: 18px; font-weight: 600; padding-right: 10px; }
+    .resume { background: var(--sheet); border: 1px solid var(--rule); padding: 12px 14px; margin-top: 12px; }
+    .resume textarea { height: 140px; font-size: 12px; }
+    .pdf-line { display: flex; gap: 10px; align-items: center; margin-top: 8px; }
+    #rules, #profileNotes { height: 170px; }
+    #signature { height: 70px; }
+    .savebar { position: sticky; bottom: 0; background: var(--paper); border-top: 1px solid var(--rule); padding: 12px 0; margin-top: 24px; display: flex; gap: 12px; align-items: center; }
+    #status.ok { color: var(--ok); }
+    #status.bad { color: var(--red); }
+  </style>
+</head>
+<body>
+  <div class="airmail"></div>
+  <main>
+    <h1>Outreach settings</h1>
+    <p class="lede">Your key, resumes, and rules stay in this browser's extension storage and are only sent to the Anthropic API when you draft.</p>
+
+    <fieldset>
+      <legend>Claude</legend>
+      <label for="apiKey">Anthropic API key <span class="hint">from console.anthropic.com. A Claude.ai subscription doesn't include API access.</span></label>
+      <div class="row">
+        <input type="password" id="apiKey" autocomplete="off" placeholder="sk-ant-..." />
+        <button class="shrink" id="testKey">Test key</button>
+      </div>
+      <label for="model">Model <span class="hint">pick one or type any model ID</span></label>
+      <input type="text" id="model" list="models" />
+      <datalist id="models"></datalist>
+    </fieldset>
+
+    <fieldset>
+      <legend>You</legend>
+      <label for="senderName">Your name</label>
+      <input type="text" id="senderName" placeholder="Jane Doe" />
+      <label for="signature">Signature <span class="hint">added under the closing line</span></label>
+      <textarea id="signature" placeholder="Jane Doe&#10;jane@example.com | linkedin.com/in/janedoe"></textarea>
+      <label for="profileNotes">Facts Claude may use <span class="hint">metrics and highlights beyond the resume</span></label>
+      <textarea id="profileNotes" placeholder="e.g. Cut API latency 40% at Acme; led migration to Kafka; open to relocation"></textarea>
+    </fieldset>
+
+    <fieldset>
+      <legend>Resumes</legend>
+      <p class="hint">Attach a PDF, paste text, or both. Leave a slot blank to skip it. With several, Claude picks the best fit unless you choose one in the popup.</p>
+      <div id="resumes"></div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Outreach rules</legend>
+      <label for="rules">Claude follows these exactly</label>
+      <textarea id="rules"></textarea>
+      <button class="link" id="resetRules" style="margin-top:6px">Restore default rules</button>
+    </fieldset>
+
+    <div class="savebar">
+      <button class="primary" id="save">Save settings</button>
+      <span id="status" role="status"></span>
+    </div>
+  </main>
+
+  <template id="resumeTpl">
+    <div class="resume">
+      <label>Variant name</label>
+      <input type="text" class="r-name" />
+      <label>Resume text</label>
+      <textarea class="r-text" placeholder="Paste plain-text resume (optional if you attach a PDF)"></textarea>
+      <div class="pdf-line">
+        <input type="file" class="r-file" accept="application/pdf" />
+        <span class="hint r-pdfname"></span>
+        <button class="link r-clear" hidden>Remove PDF</button>
+      </div>
+    </div>
+  </template>
+
+  <script src="defaults.js"></script>
+  <script src="options.js"></script>
+</body>
+</html>
